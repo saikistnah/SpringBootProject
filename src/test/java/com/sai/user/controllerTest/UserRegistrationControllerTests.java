@@ -44,13 +44,13 @@ public class UserRegistrationControllerTests {
 	UserUtils userUtils;
 	
 	@InjectMocks
-    private UserRegistrationController abc;
+    private UserRegistrationController userRegistrationController;
 	
 	@Before
     public void setup() throws IOException {
 
         MockitoAnnotations.initMocks(this);
-        this.mockMvc = MockMvcBuilders.standaloneSetup(abc).build();
+        this.mockMvc = MockMvcBuilders.standaloneSetup(userRegistrationController).build();
     }
 
 	@Test
