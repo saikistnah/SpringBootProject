@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sai.user.exception.CustomExceptionWithHttpStatusCode;
@@ -80,8 +79,7 @@ public class UserRegistrationController {
 	}
 	
 	@RequestMapping(value="/delete/{id}",method=RequestMethod.DELETE)
-	public @ResponseBody String delete(@PathVariable("id") int id){
-		String message = null;
+	public ResponseEntity<?> delete(@PathVariable("id") int id){
 		List<User> users = userService.getUsers();
 		User user = users.get(id-1);
 		if(user.getId() == id && user.isActive()){
@@ -89,11 +87,10 @@ public class UserRegistrationController {
 			users.remove(id-1);
 			users.add(id-1, user);
 			userService.createUser(users);
-			message = "deleted sucessfully";
+			return new ResponseEntity<String>("deleted sucessfully",HttpStatus.OK);
 		}else{
-			message = "user not available";
+			return customExceptionWithHttpStatusCode.errorHandle("user not available",id,"user not available");
 		}
-		return message;
 	}
 	
 }
