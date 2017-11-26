@@ -87,7 +87,7 @@ public class UserRegistrationControllerTests {
 		user.setActive(false);
 		user.setId(0);
 		
-		mockMvc.perform(post("/update/1")
+		mockMvc.perform(put("/update/1")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
                 .content(TestUtil.convertObjectToJsonBytes(user))
         )
@@ -107,7 +107,7 @@ public class UserRegistrationControllerTests {
 		user.setActive(false);
 		user.setId(0);
 		
-		mockMvc.perform(post("/update/1")
+		mockMvc.perform(put("/update/1")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
                 .content(TestUtil.convertObjectToJsonBytes(user))
         )
@@ -127,9 +127,8 @@ public class UserRegistrationControllerTests {
 		user.setActive(false);
 		user.setId(0);
 		
-		mockMvc.perform(post("/delete/1")
+		mockMvc.perform(delete("/delete/1")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(user))
         )
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8));
@@ -147,9 +146,8 @@ public class UserRegistrationControllerTests {
 		user.setActive(false);
 		user.setId(0);
 		
-		mockMvc.perform(post("/delete/1")
+		mockMvc.perform(delete("/delete/1")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(user))
         )
                 .andExpect(status().isConflict())
                 .andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8));
